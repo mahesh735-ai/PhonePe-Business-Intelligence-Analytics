@@ -8,7 +8,7 @@ The project demonstrates how a Data Analyst can transform raw fintech transactio
 
 ## Dashboard Preview
 
-![PhonePe Payment Insights Dashboard](https://github.com/mahesh735-ai/PhonePe-Business-Intelligence-Analytics/blob/main/Phonepe_Dashboard.png)
+![PhonePe Payment Insights Dashboard](https://github.com/mahesh735-ai/PhonePe-Business-Intelligence-Analytics/blob/main/Phonepe_BI_project_Dashboard.png)
 
 ---
 
