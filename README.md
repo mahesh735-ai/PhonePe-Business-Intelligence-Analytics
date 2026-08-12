@@ -1,38 +1,30 @@
-# 📱 PhonePe Payment Insights Dashboard — Power BI
+ PhonePe Payment Insights Dashboard — Power BI
 
-An end-to-end **Power BI Business Intelligence** project analyzing **300K+ PhonePe UPI transactions and 108K+ users** to understand payment behavior, transaction trends, service performance, and customer activity.
+An end-to-end Power BI Business Intelligence project analyzing **300K+ PhonePe UPI transactions** across **108K+ users** to understand payment behavior, transaction trends, service performance, and customer activity.
 
-The project demonstrates how a Data Analyst can transform raw fintech transaction data into actionable business insights to support product and business decisions.
+The project demonstrates how a Data Analyst can transform raw fintech transaction data into actionable business insights that support product and business decisions.
 
 ---
 
-## 📸 Dashboard Preview
-
-<!-- Add your dashboard screenshot below -->
+## Dashboard Preview
 
 ![PhonePe Payment Insights Dashboard](https://github.com/mahesh735-ai/PhonePe-Business-Intelligence-Analytics/blob/main/Phonepe_Dashboard.png)
 
 ---
 
-## 🎯 Business Problem
+## Business Problem
 
-Digital payment platforms generate large volumes of transaction data across multiple services, users, and payment outcomes.
-
-The objective of this project is to transform raw transaction and user data into a business intelligence solution that helps answer questions such as:
+Digital payment platforms generate large volumes of transaction data across multiple services, users, and payment outcomes. This project turns that raw data into a BI solution answering questions such as:
 
 - Which services contribute the highest transaction value?
 - How are transaction volume and value changing over time?
 - Which user segments contribute most to platform activity?
-- What percentage of transactions are successful or failed?
-- What are the major reasons for payment failures?
-- When are users most active?
-- Which services and customer segments require further attention?
+- What percentage of transactions succeed or fail, and why?
+- When are users most active — weekdays or weekends?
 
 ---
 
-## 📊 Dataset
-
-The project uses a **PhonePe transaction and user dataset** containing detailed information about users, transactions, services, payment status, and transaction outcomes.
+## Dataset
 
 | Table | Records | Key Fields |
 |---|---:|---|
@@ -43,153 +35,126 @@ The project uses a **PhonePe transaction and user dataset** containing detailed 
 
 ---
 
-## 🛠️ Tools & Technologies
+## Tools & Technologies
 
-- **Power BI Desktop** — Data modeling, DAX, visualization and dashboard development
-- **Power Query (M)** — Data cleaning and transformation
-- **DAX** — KPI calculations and time-based analysis
-- **Microsoft Excel** — Source data
-- **Figma** — Custom dashboard UI/background design
-
----
-
-## 🏗️ Data Preparation & Modeling
-
-The project follows an end-to-end BI workflow:
-
-**Raw Data → Power Query → Data Cleaning → Data Modeling → DAX → Visualization → Business Insights**
-
-### Data Cleaning & Transformation
-
-- Removed duplicate records
-- Handled blank/missing values
-- Standardized categorical values
-- Validated data types
-- Prepared data for analytical modeling
-
-### Data Modeling
-
-- Built a proper **Star Schema**
-- Created a dedicated Date Table using DAX
-- Implemented **1-to-many relationships**
-- Used single-direction cross-filtering
-- Structured the model for efficient analysis
-
-### Date Table
-
-The Date Table includes:
-
-- Year
-- Month
-- Quarter
-- Weekday
-- Weekend Flag
-- Date-based analysis fields
+- **Power BI Desktop** — data modeling, DAX, visualization and dashboard development
+- **Power Query (M)** — data cleaning and transformation
+- **DAX** — KPI calculations and time-intelligence
+- **Microsoft Excel** — source data
+- **Figma** — custom dashboard UI/background design
 
 ---
 
-## 📐 DAX & Analytics
+## Data Preparation & Modeling
 
-Developed **8 DAX measures** for KPI and business analysis, including:
+**Workflow:** Raw Data → Power Query → Data Cleaning → Data Modeling → DAX → Visualization → Business Insights
+
+**Data Cleaning**
+- Removed duplicate rows on `Transaction_ID` and `User_ID`
+- Removed blank rows in `All_Users` (missing User_ID would break the relationship)
+- Standardized categorical labels (e.g. `Recharge_Bills` → `Recharge Bills`)
+- Validated data types across both tables using Power BI's Column Quality/Distribution profiling
+
+**Data Modeling**
+- Built a star schema — `All_Users` and `Date_Table` both connect to `All_Transactions` (the fact table)
+- All relationships: 1-to-Many, single-direction cross-filtering
+- Dedicated **Date Table** built with DAX (`CALENDAR`, `ADDCOLUMNS`) — Year, Month, Month Number, Quarter, Week Day, Day Number, Weekend flag
+- Month and Week Day sorted via **Sort By Column** (by their numeric equivalents) so charts display in correct calendar order
+- Date table explicitly **Marked as Date Table** to enable time-intelligence DAX functions
+
+---
+
+## DAX & Analytics
+
+8 DAX measures organized in a dedicated `Measures` table, including:
 
 - Total Transactions
 - Total Transaction Value
 - Unique Users
 - Successful Transactions
 - Transaction Success Rate
-- Month-over-Month Transaction Growth
+- Month-over-Month Transaction Growth (count)
 - Month-over-Month Transaction Value Growth
-- Other supporting business metrics
+- Supporting business metrics
 
-### Dynamic Analytics
-
-The dashboard also includes:
-
-- Dynamic conditional formatting
-- MoM growth indicators
-- Gradient-based visual formatting
-- Dynamic insight text based on slicer selections
-- Drill-through/tooltips for deeper analysis
+**Dynamic Analytics**
+- Rule-based conditional formatting — MoM cards turn green/red based on positive/negative growth
+- Gradient color-coded bar charts — shaded by transaction value (light → dark)
+- Dynamic natural-language insight text — auto-updates based on slicer selection
+- Drill-through tooltips — Age Segment breakdown and Service Type sub-category breakdown
 
 ---
 
-## 📊 Dashboard Features
+## Dashboard Features
 
-### Executive Overview
+**Executive Overview**
+- Total Transactions, Total Transaction Value, Unique Users, Success Rate
+- Monthly transaction trend (line/area chart)
+- Service-wise revenue breakdown
+- Age segment contribution
+- Weekday vs weekend usage
+- Top 5 users by transaction value
 
-The main dashboard provides a high-level view of:
+**Interactive Elements**
+- Month and Payment Status slicers
+- Drill-through tooltips for deeper breakdowns
+- Live insight text that updates with filter selection
 
-- Total Transactions
-- Total Transaction Value
-- Unique Users
-- Transaction Success Rate
-- Monthly Transaction Trends
-- Service Performance
-- User Demographics
-- Weekday vs Weekend Activity
-
-### Interactive Analysis
-
-Users can explore the data using:
-
-- Month filters
-- Payment Status filters
-- Interactive charts
-- Drill-through/tooltips
-- Dynamic business insights
+**Design**
+- Custom background designed in Figma — not a default Power BI theme
+- All default visual backgrounds/borders removed for a clean, card-based look
+- Kept intentionally simple: 4 KPIs, 2 slicers, 6 core visuals, 2 tooltip pages — prioritizing clarity over visual density
 
 ---
 
-## 💡 Key Business Insights
+## Key Business Insights
 
 | Finding | Business Interpretation |
 |---|---|
-| **Loans generate the highest transaction value** | Loan-related services represent a significant share of transaction value |
-| **96% overall transaction success rate** | The remaining failed transactions represent an opportunity to investigate payment issues |
-| **Millennials represent 37.3% of users and Gen Z 20.74%** | Younger customer segments form a significant portion of the user base |
-| **71.6% of transactions occur on weekdays** | User activity is significantly higher during weekdays |
-| **Transaction volume shows monthly variation** | Seasonal patterns can help inform campaign and engagement planning |
-
-### 🔎 Additional Insights
-
-> Add your own findings here after independently exploring the dashboard and dataset.
-
-- 
-- 
-- 
+| Loans generate the highest transaction value (₹2.5B+) among all services | Loan-related services represent the largest share of platform transaction value |
+| 96% overall transaction success rate | The remaining 4% (Insufficient Amount, Server Error, Wrong PIN) represents a recoverable-value opportunity |
+| Gen X is the largest user segment (37.4%), closely followed by Millennials (37.3%) | The user base skews toward adult, established earners rather than purely younger users |
+| 71.6% of transactions occur on weekdays vs 28.4% on weekends | User activity is significantly higher on weekdays |
+| Transaction volume shows clear monthly seasonality | Seasonal patterns can inform campaign and engagement timing |
 
 ---
 
-## 🎯 Business Recommendations
+## Business Recommendations
 
-Based on the analysis:
-
-1. **Investigate payment failures** to identify operational issues and reduce unsuccessful transactions.
-2. **Focus engagement strategies on younger customer segments** based on their significant contribution to the user base.
-3. **Optimize service-specific campaigns** around high-value services such as Loans.
-4. **Use transaction seasonality** to plan targeted promotional campaigns.
-5. **Monitor weekday transaction behavior** when planning customer engagement activities.
-
-### 💡 Additional Recommendations
-
-> Add your own business recommendations after your independent analysis.
-
-1. 
-2. 
-3. 
+1. Investigate payment failure reasons (Insufficient Amount, Server Error, Wrong PIN) to reduce the 4% failure rate.
+2. Prioritize loan-related product promotion, given its outsized contribution to transaction value.
+3. Design engagement campaigns around the Gen X and Millennial segments, which together drive the majority of platform activity.
+4. Use observed monthly seasonality to time promotional campaigns for maximum impact.
+5. Leverage weekday activity patterns when scheduling reminders and engagement pushes.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-```text
+```
 PhonePe-Business-Intelligence-Analytics/
 │
-├── PhonePe_Analysis_Project_BI.pbix
-├── Phonepe-Final-Dataset.xlsx
-├── README.md
-├── Documentation.md
-├── STAR_Interview_Prep.md
-│
-└── screenshots/
-    └── dashboard-preview.png
+├── PhonePe_Analysis_Project_BI.pbix          # Main Power BI file
+├── Phonepe-Final-Dataset.xlsx                # Source dataset
+├── README.md                                 # This file
+├── PhonePe_Project_Documentation.pdf         # Detailed project documentation
+├── STAR_Interview_Prep.pdf                   # Interview Q&A + STAR method notes
+└── Phonepe_Dashboard.png                     # Dashboard screenshot
+```
+
+---
+
+## How to Use
+
+1. Clone/download this repository
+2. Open `PhonePe_Analysis_Project_BI.pbix` in Power BI Desktop
+3. If prompted, update the data source path to point to `Phonepe-Final-Dataset.xlsx` on your machine
+4. Explore the dashboard — use the Month and Payment Status slicers to filter
+
+---
+
+## Author
+
+**Mahesh Thakare** — Final-year B.Tech CSE Student | Aspiring Data Analyst
+[LinkedIn](https://www.linkedin.com/in/mahesh-thakare-75817b2a7) · [GitHub](https://github.com/mahesh735-ai)
+
